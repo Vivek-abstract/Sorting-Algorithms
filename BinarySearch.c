@@ -15,7 +15,7 @@ int BinarySearch(int a[], int n, int element){
 }
 int main(){
     int a[] = {1,2,3,4,5,6,7,8,9,10};
-    int element = 1;
+    int element = 4;
     int n = sizeof(a) / sizeof(a[0]);
     int pos = BinarySearch(a, n, element);
     if(pos != -1)
