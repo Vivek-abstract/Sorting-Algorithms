@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAX 100
-int Binary(int n);
+void Binary(int n);
 int stack[MAX];
 int top = -1;
 int main(){
@@ -10,7 +10,7 @@ int main(){
     Binary(n);
     return 0;
 }
-int Binary(int n){
+void Binary(int n){
     int r;
     while(n > 0){
         stack[++top] = n % 2;
