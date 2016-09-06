@@ -22,10 +22,10 @@ int isPallindrome(char a[]){
     char rev[100];
     n = strlen(a);
     for(i = 0; i < n; i++){
-        stack[top++] = a[i];
+        stack[++top] = a[i];
     }
     for(i = 0; i < n; i++){
-        rev[i] = stack[--top];
+        rev[i] = stack[top--];
     }
     rev[i] = '\0';           // The cherry on the cake xD
     if(strcmp(a,rev) == 0)   // Or use strcasecmp if you're case sensitive
