@@ -8,6 +8,8 @@ struct node *rfirst = NULL, *rlast = NULL;
 struct node *create(struct node *p);
 void add_poly(struct node *p1, struct node *p2);
 void display(struct node *p);
+void insert(int c, int e);
+
 int main()
 {
     struct node *p1 = NULL, *p2 = NULL;
@@ -31,14 +33,14 @@ struct node *create(struct node *p){
     scanf("%d%d", &coeff,&exp);
     while(coeff != -1 || exp != -1){
         nn = (struct node *)malloc(sizeof(struct node));
-        nn->c = coeff;
-        nn->e = exp;
-        nn->next = NULL;
+        nn -> c = coeff;
+        nn -> e = exp;
+        nn -> next = NULL;
         if(p == NULL){
             p = nn;
             last = nn;
         }else{
-            last->next = nn;
+            last -> next = nn;
             last = nn;
         }
         printf("Enter coeff and exp or enter -1 to stop: ");
@@ -48,47 +50,53 @@ struct node *create(struct node *p){
 };
 void display(struct node *p){
     while(p != NULL){
-        printf("(%d,%d) -> ", p->c, p->e);
-        p = p->next;
+        printf("(%d,%d) -> ", p -> c, p -> e);
+        p = p -> next;
     }
     printf("NULL\n");
 }
 void add_poly(struct node *p1, struct node *p2){
     while(p1!= NULL && p2 != NULL){
-        if(p1->e == p2->e){
-            insert(p1->c + p2->c, p1->e);
-            p1 = p1->next;
-            p2 = p2->next;
+        if(p1 -> e == p2 -> e){
+            //p1 = 5x p2 = 5x
+            // 5x + 5x = (5+5)x = 10x
+            insert(p1 -> c + p2 -> c, p1 -> e);
+            p1 = p1 -> next;
+            p2 = p2 -> next;
         }
-        else if(p1->e > p2->e){
-            insert(p1->c,p1->e);
-            p1 = p1->next;
+        else if(p1 -> e > p2 -> e){
+            //p1 = 5x^2 p2 = 5x
+            //5x^2 + 5x
+            insert(p1 -> c,p1 -> e);
+            p1 = p1 -> next;
         }
         else{
-            insert(p2->c, p2->e);
-            p2 = p2->next;
+            //p1 = 5x p2 = 5x^2
+            //5x^2 + 5x
+            insert(p2 -> c, p2 -> e);
+            p2 = p2 -> next;
         }
     }
     while(p1 != NULL){
-        insert(p1->c, p1->e);
-        p1 = p1->next;
+        insert(p1 -> c, p1 -> e);
+        p1 = p1 -> next;
     }
     while(p2 != NULL){
-        insert(p2->c, p2->e);
-        p2 = p2->next;
+        insert(p2 -> c, p2 -> e);
+        p2 = p2 -> next;
     }
 }
 void insert(int c, int e){
     struct node *nn;
     nn = (struct node *)malloc(sizeof(struct node));
-    nn->c = c;
-    nn->e = e;
-    nn->next = NULL;
+    nn -> c = c;
+    nn -> e = e;
+    nn -> next = NULL;
     if(rfirst == NULL){
         rfirst = nn;
         rlast = nn;
     }else{
-        rlast->next = nn;
+        rlast -> next = nn;
         rlast = nn;
     }
 }
